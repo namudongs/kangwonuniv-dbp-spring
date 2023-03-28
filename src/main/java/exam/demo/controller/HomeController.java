@@ -19,8 +19,4 @@ public class HomeController {
 
 
     MemberRepository memberRepository;
-    @GetMapping("/")
-    public String showHome(){
-        return "home";
-    }
 }
