@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class MemberService {
+public class SignupService {
     @Autowired
     MemberRepository memberRepository;
 

@@ -5,7 +5,9 @@
   <title>Logged In Page</title>
 </head>
 <body>
-<h1>Welcome, ${username}!</h1>
-<p>로그인 성공</p>
+<h1>로그인 성공 페이지</h1>
+<p th:text="${member}"></p>
+
+<a href="/logout">로그아웃</a>
 </body>
 </html>

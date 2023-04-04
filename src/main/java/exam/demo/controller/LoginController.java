@@ -1,6 +1,7 @@
 package exam.demo.controller;
 
 import exam.demo.constant.SessionConst;
+import exam.demo.constant.SessionManager;
 import exam.demo.entity.Member;
 import exam.demo.service.LoginService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,9 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
+    SessionManager sessionManager;
+
+    @Autowired
     private final LoginService loginService;
 
 
@@ -31,16 +35,16 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String Login(
-            @SessionAttribute(name = SessionConst.LOGIN_USER, required = false)
-            Member member,
+    public String homeLogin(
+            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false)
+            Member loginMember,
             Model model) {
 
-        if (member == null) {
+        if (loginMember == null) {
             return "home";
         }
 
-        model.addAttribute("username", member.getName());
+        model.addAttribute("member", loginMember.getName());
         return "loggedin";
     }
 
@@ -51,7 +55,7 @@ public class LoginController {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_USER, member);
+        session.setAttribute(SessionConst.LOGIN_MEMBER, member);
 
         return "redirect:/";
     }
