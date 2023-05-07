@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie List</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F9F9F9;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .movie {
+      width: 200px;
+      margin: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      background-color: #FFF;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .poster {
+      max-width: 150px;
+      max-height: 250px;
+      margin: 10px;
+    }
+    .movie-title {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin: 10px;
+      text-decoration: none; /* 밑줄 없애기 */
+    }
+    .movie-title:hover {
+      text-decoration: underline; /* 마우스 오버 시 밑줄 생성 */
+    }
+    .button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #FFF;
+      background-color: #FF5722;
+      text-decoration: none;
+    }
+    .button:hover {
+      background-color: #FF8A65;
+    }
+  </style>
+</head>
+<body>
+<h1>Movie List</h1>
+<div th:each="movie : ${movies}" class="movie">
+  <img class="poster" th:src="@{${movie.getImgPath()}}" alt="movie poster">
+  <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}">제목</a></h2>
+</div>
+<a th:href="@{/movies/register}" class="button">영화 등록</a>
+</body>
+</html>
