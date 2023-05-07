@@ -31,7 +31,7 @@ public class SignupServiceTest {
 //When
         Long saveId = signupService.join(member);
 //Then
-        Member findMember = memberRepository.findOne(saveId);
+        Member findMember = memberRepository.findByName(saveId);
         assertEquals(member.getName(), findMember.getName());
     }
     @Test

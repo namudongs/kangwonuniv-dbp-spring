@@ -19,7 +19,7 @@ public class SignupService {
     public Long join(Member member){
         validateDuplicateMember(member);
         memberRepository.save(member);
-        return member.getId();
+        return member.getMember_id();
     }
 
     private void validateDuplicateMember(Member member){

@@ -15,8 +15,8 @@ import javax.persistence.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private Long id;
+    @Column(name="member_ID")
+    private Long member_id;
 
     @Column(name = "NAME", nullable = false, length = 15)
     private String name;
@@ -30,12 +30,13 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    public Long getId() {
-        return id;
+
+    public Long getMember_id() {
+        return member_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMember_id(Long member_id) {
+        this.member_id = member_id;
     }
 
     public String getName() {

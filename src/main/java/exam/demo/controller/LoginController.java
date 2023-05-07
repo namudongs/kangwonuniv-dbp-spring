@@ -1,7 +1,7 @@
 package exam.demo.controller;
 
 import exam.demo.constant.SessionConst;
-import exam.demo.constant.SessionManager;
+
 import exam.demo.entity.Member;
 import exam.demo.service.LoginService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +23,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    SessionManager sessionManager;
-
-    @Autowired
     private final LoginService loginService;
 
 
@@ -45,6 +42,9 @@ public class LoginController {
         }
 
         model.addAttribute("member", loginMember.getName());
+
+
+
         return "loggedin";
     }
 
