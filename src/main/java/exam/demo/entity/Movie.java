@@ -24,14 +24,9 @@ public class Movie {
     private String rating;
     private String releaseDate;
     private String country;
-
+    private String plot;
     private String ImgPath;
-
     private String ImgName;
-
-
-
-
 
     // getters and setters
 
@@ -124,6 +119,12 @@ public class Movie {
         this.country = country;
     }
 
+    public String getPlot() {
+        return plot;
+    }
 
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
 }
 

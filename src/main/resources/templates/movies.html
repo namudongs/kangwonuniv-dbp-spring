@@ -13,6 +13,7 @@
       justify-content: space-around;
     }
     .movie {
+      position: relative;
       width: 200px;
       margin: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -24,27 +25,39 @@
       max-width: 150px;
       max-height: 250px;
       margin: 10px;
+      transition: filter 0.5s ease-in-out;
     }
     .movie-title {
       font-weight: bold;
       font-size: 1.2em;
       margin: 10px;
-      text-decoration: none; /* 밑줄 없애기 */
     }
-    .movie-title:hover {
-      text-decoration: underline; /* 마우스 오버 시 밑줄 생성 */
+    .buttons {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .movie:hover .poster {
+      filter: brightness(70%);
+    }
+    .movie:hover .buttons {
+      opacity: 1;
     }
     .button {
       display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      border-radius: 5px;
+      margin: 10px auto;
+      padding: 10px;
       color: #FFF;
-      background-color: #FF5722;
-      text-decoration: none;
+      background-color: #F03A47;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .button:hover {
-      background-color: #FF8A65;
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
@@ -52,6 +65,10 @@
 <h1>Movie List</h1>
 <div th:each="movie : ${movies}" class="movie">
   <img class="poster" th:src="@{${movie.getImgPath()}}" alt="movie poster">
+  <div class="buttons">
+    <a th:href="@{/movies/{id}(id=${movie.id})}" class="button">상세보기</a>
+    <a th:href="@{/movies/reserve/{id}(id=${movie.id})}" class="button">예매하기</a>
+  </div>
   <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}">제목</a></h2>
 </div>
 <a th:href="@{/movies/register}" class="button">영화 등록</a>
