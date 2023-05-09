@@ -15,7 +15,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long movie_id;
     private String title;
     private String director;
     private String cast;
@@ -29,8 +29,6 @@ public class Movie {
     private String ImgName;
 
     // getters and setters
-
-
     public String getImgPath() {
         return ImgPath;
     }
@@ -47,12 +45,13 @@ public class Movie {
         ImgName = imgName;
     }
 
-    public Long getId() {
-        return id;
+
+    public Long getMovie_id() {
+        return movie_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMovie_id(Long movie_id) {
+        this.movie_id = movie_id;
     }
 
     public String getTitle() {

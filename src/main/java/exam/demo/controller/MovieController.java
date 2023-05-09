@@ -2,7 +2,9 @@ package exam.demo.controller;
 
 
 import exam.demo.entity.Movie;
+import exam.demo.entity.Review;
 import exam.demo.service.MovieService;
+import exam.demo.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/movies")
     public String showAllMovies(Model model) {
@@ -33,6 +37,7 @@ public class MovieController {
     @GetMapping("/movies/{id}")
     public String showMovieDetails(@PathVariable Long id, Model model) {
         Movie movie = movieService.getMovieById(id);
+
         model.addAttribute("movie", movie);
         return "movieDetails";
     }

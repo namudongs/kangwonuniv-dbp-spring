@@ -66,10 +66,10 @@
 <div th:each="movie : ${movies}" class="movie">
   <img class="poster" th:src="@{${movie.getImgPath()}}" alt="movie poster">
   <div class="buttons">
-    <a th:href="@{/movies/{id}(id=${movie.id})}" class="button">상세보기</a>
-    <a th:href="@{/movies/reserve/{id}(id=${movie.id})}" class="button">예매하기</a>
+    <a th:href="@{/movies/{id}(id=${movie.movie_id})}" class="button">상세보기</a>
+    <a th:href="@{/movies/reserve/{id}(id=${movie.movie_id})}" class="button">예매하기</a>
   </div>
-  <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}">제목</a></h2>
+  <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.movie_id})}" th:text="${movie.title}">제목</a></h2>
 </div>
 <a th:href="@{/movies/register}" class="button">영화 등록</a>
 </body>

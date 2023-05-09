@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
   <meta charset="UTF-8">
   <title th:text="${movie.title} + ' - Movie Detail'">Movie Detail</title>
   <style>
@@ -47,6 +48,7 @@
       flex-direction: row;
       align-items: flex-start;
       margin-top: 50px;
+      justify-content: center; /* 추가된 코드 */
     }
     .movie-image {
       flex-basis: 30%;
@@ -97,7 +99,9 @@
     <p class="movie-cast" th:text="'국가: ' + ${movie.country}"></p>
     <p class="movie-cast" th:text="'개봉일: ' + ${movie.releaseDate}"></p>
     <p class="movie-cast" th:text="'줄거리: ' + ${movie.plot}"></p>
+    <p class="movie-cast" th:text="'영화아이디: ' + ${movie.movie_id}"></p>
     <a href="#" class="movie-bookmark">예매하기</a>
+    <a th:href="@{/movies/{id}/reviews/new(id=${movie.movie_id})}" class="button">한줄리뷰</a>
   </div>
 </div>
 </body>
