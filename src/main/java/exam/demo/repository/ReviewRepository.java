@@ -1,7 +1,5 @@
 package exam.demo.repository;
 
-
-import exam.demo.entity.Movie;
 import exam.demo.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

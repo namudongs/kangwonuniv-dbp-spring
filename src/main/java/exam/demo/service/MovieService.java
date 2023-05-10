@@ -19,8 +19,6 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-
-
     public void registerMovie(Movie movie, MultipartFile imgFile) throws IOException {
 
         String oriImgName = imgFile.getOriginalFilename();
@@ -43,10 +41,8 @@ public class MovieService {
         movie.setImgName(imgName);
         movie.setImgPath("/files/" + imgName);
 
-
         movieRepository.save(movie);
     }
-
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();

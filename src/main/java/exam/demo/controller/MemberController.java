@@ -1,6 +1,5 @@
 package exam.demo.controller;
 
-
 import exam.demo.entity.Member;
 import exam.demo.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class MemberController {
     public String signup(@ModelAttribute("member") Member member, Model model) {
         try {
             signupService.join(member);
-            return "redirect:/signup-success";
+            return "redirect:/";
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
             return "redirect:/";
