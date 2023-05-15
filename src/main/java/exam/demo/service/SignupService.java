@@ -17,18 +17,12 @@ public class SignupService {
     MemberRepository memberRepository;
 
     public Long join(Member member){
-        validateDuplicateMember(member);
+
         memberRepository.save(member);
         return member.getMember_id();
     }
 
-    private void validateDuplicateMember(Member member){
-        Optional<Member> findMembers =
-                Optional.ofNullable(memberRepository.findByName(member.getName()));
-        if(!findMembers.isEmpty()){
-            throw new IllegalStateException("이미 존재하는 ID입니다.");
-        }
-    }
+
     public List<Member> findMembers(){
         return memberRepository.findAll();
     }

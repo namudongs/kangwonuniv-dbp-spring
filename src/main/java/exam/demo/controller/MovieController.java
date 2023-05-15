@@ -20,8 +20,6 @@ import java.util.List;
 @Controller
 public class MovieController {
 
-
-
     @Autowired
     private MovieService movieService;
     @Autowired
@@ -37,7 +35,6 @@ public class MovieController {
     @GetMapping("/movies/{id}")
     public String showMovieDetails(@PathVariable Long id, Model model) {
         Movie movie = movieService.getMovieById(id);
-
         model.addAttribute("movie", movie);
         return "movieDetails";
     }
@@ -47,7 +44,6 @@ public class MovieController {
         model.addAttribute("movie", new Movie());
         return "registerMovie";
     }
-
 
     @PostMapping("/movies/register")
     public String registerMovie(@ModelAttribute Movie movie, MultipartFile imgFile) throws IOException {
