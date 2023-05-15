@@ -47,7 +47,6 @@ public class MovieController {
 
     @PostMapping("/movies/register")
     public String registerMovie(@ModelAttribute Movie movie, MultipartFile imgFile) throws IOException {
-
         movieService.registerMovie(movie, imgFile);
         return "redirect:/movies";
     }
