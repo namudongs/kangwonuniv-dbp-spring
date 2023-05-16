@@ -1,3 +1,4 @@
+/* 폰트 시작 */
 @font-face {
     font-family: 'NanumSquareNeo-Variable';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
@@ -6,11 +7,12 @@
 }
 
 * { font-family: 'NanumSquareNeo-Variable'; }
+/* 폰트 끝 */
 
 body { margin: 0; }
-
 a { text-decoration: none; color: black; }
 
+/* 네비게이션 바 시작 */
 .navbar {
     display: flex;
     align-items: center;
@@ -43,7 +45,9 @@ a { text-decoration: none; color: black; }
 .navbar__menu li {
     padding: 8px 12px;
 }
+/* 네비게이션 바 끝 */
 
+/* 영화 목록 시작 */
 .movie-list-title {
     font-size: 50px;
     text-align: center;
@@ -61,13 +65,13 @@ a { text-decoration: none; color: black; }
     display: inline-block;
     text-align: center;
     margin-left: 30px;
-    border: 1px solid #ccc; /* 박스의 테두리 스타일 */
-    padding: 15px; /* 박스 내부 여백 */
+    border: 1px solid #ccc;
+    padding: 15px;
     vertical-align: top;
 }
 
 .movie-poster img {
-    width: 440px; /* 포스터 이미지의 적절한 크기로 조정하세요 */
+    width: 440px;
     height: 650px;
 }
 
@@ -75,7 +79,9 @@ a { text-decoration: none; color: black; }
     font-size: 15px;
     margin-bottom: 0px;
 }
+/* 영화 목록 끝 */
 
+/* 영화 버튼 시작 */
 .reserve-button,
 .details-button {
     margin-top: 10px;
@@ -104,3 +110,4 @@ a { text-decoration: none; color: black; }
 .details-button:hover {
     background-color: #0076a3;
 }
+/* 영화 버튼 끝 */
