@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    padding: 8px 12px;
+}
+
+.navbar__logo {
+    font-size: 24px;
+    color: white;
+}
+
+.navbar__logo i {
+    padding-left: 20px;
+    padding-right: 5px;
+    color:black;
+}
+
+.navbar__menu {
+    display: flex;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.navbar__menu li:hover {
+    background-color: gainsboro;
+    border-radius: 4px;
+}
+
+.navbar__menu li {
+    padding: 8px 12px;
+}
+
+.movie-list-title {
+    font-size: 50px;
+    text-align: center;
+}
+
+.movie-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 850px;
+}
+
+.movie-box {
+    display: inline-block;
+    text-align: center;
+    margin-left: 30px;
+    border: 1px solid #ccc; /* 박스의 테두리 스타일 */
+    padding: 15px; /* 박스 내부 여백 */
+    vertical-align: top;
+}
+
+.movie-poster img {
+    width: 440px; /* 포스터 이미지의 적절한 크기로 조정하세요 */
+    height: 650px;
+}
+
+.movie-title {
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.reserve-button,
+.details-button {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.reserve-button {
+    background-color: #4CAF50;
+}
+
+.reserve-button:hover {
+    background-color: #45a049;
+}
+
+.details-button {
+    background-color: #008CBA;
+}
+
+.details-button:hover {
+    background-color: #0076a3;
+}

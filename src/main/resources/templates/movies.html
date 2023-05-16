@@ -1,78 +1,47 @@
 <!--영화목록 페이지-->
-<!--담당: -->
+<!--담당: 남동현 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Movie List</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #F9F9F9;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .movie {
-      position: relative;
-      width: 200px;
-      margin: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      background-color: #FFF;
-      text-align: center;
-      border-radius: 5px;
-    }
-    .poster {
-      max-width: 150px;
-      max-height: 250px;
-      margin: 10px;
-      transition: filter 0.5s ease-in-out;
-    }
-    .movie-title {
-      font-weight: bold;
-      font-size: 1.2em;
-      margin: 10px;
-    }
-    .buttons {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .movie:hover .poster {
-      filter: brightness(70%);
-    }
-    .movie:hover .buttons {
-      opacity: 1;
-    }
-    .button {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      color: #FFF;
-      background-color: #F03A47;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    a {
-      text-decoration: none;
-    }
-  </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/movieStyle.css">
+        <script src="https://kit.fontawesome.com/9cc16459ac.js" crossorigin="anonymous"></script>
+        <title>영화 목록</title>
+    </head>
 <body>
-<h1>Movie List</h1>
-<div th:each="movie : ${movies}" class="movie">
-  <img class="poster" th:src="@{${movie.getImgPath()}}" alt="movie poster">
-  <div class="buttons">
-    <a th:href="@{/movies/{id}(id=${movie.movie_id})}" class="button">상세보기</a>
-    <a th:href="@{/movies/reserve/{id}(id=${movie.movie_id})}" class="button">예매하기</a>
-  </div>
-  <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.movie_id})}" th:text="${movie.title}">제목</a></h2>
-</div>
-<a th:href="@{/movies/register}" class="button">영화 등록</a>
-</body>
+
+<!-- 상단바 -->
+    <nav class="navbar">
+        <div class="navbar__logo">
+            <i class="fa-solid fa-film"></i>
+            <a href="">DBP</a>
+        </div>
+
+        <ul class="navbar__menu">
+            <li><a th:href="@{/movies}">홈</a></li>
+            <li><a th:href="@{/movies}">영화 목록</a></li>
+            <li><a th:href="@{/movies/register}">영화 등록</a></li>
+            <li><a th:href="@{/login}">로그인</a></li>
+            <li><a th:href="@{/signup}">회원가입</a></li>
+        </ul>
+    </nav>
+
+    <h2 class="movie-list-title">영화 목록</h2>
+
+<!-- 영화정보 박스 -->
+<div class="movie-container">
+            <div th:each="movie : ${movies}" class="movie-box">
+                <div class="movie-poster">
+                    <img class="poster" th:src="@{${movie.getImgPath()}}" alt="영화 포스터">
+                </div>
+                <h2 class="movie-title"><a th:href="@{/movies/{id}(id=${movie.movie_id})}" th:text="${movie.title}">제목</a></h2>
+                <div class="buttons">
+                    <a th:href="@{/movies/reserve/{id}(id=${movie.movie_id})}" class="reserve-button">예매하기</a>
+            <a th:href="@{/movies/{id}(id=${movie.movie_id})}" class="details-button">상세보기</a>
+        </div>
+    </div>
+
+</div></body>
 </html>
