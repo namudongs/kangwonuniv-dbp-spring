@@ -1,6 +1,15 @@
-body {
-    margin: 0;
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
+
+* { font-family: 'NanumSquareNeo-Variable'; }
+
+body { margin: 0; }
+
+a { text-decoration: none; color: black; }
 
 form {
     margin: 50px auto;
@@ -34,10 +43,6 @@ button[type="submit"]:hover {
     color: white;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
 .navbar {
     display: flex;
     align-items: center;
