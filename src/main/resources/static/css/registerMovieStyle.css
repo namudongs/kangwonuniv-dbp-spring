@@ -1,0 +1,88 @@
+/* 폰트 시작 */
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* { font-family: 'NanumSquareNeo-Variable'; }
+/* 폰트 끝 */
+
+body { margin: 0; }
+a { text-decoration: none; color: black; }
+
+/* 네비게이션 바 시작 */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    padding: 8px 12px;
+}
+
+.navbar__logo {
+    font-size: 24px;
+    color: white;
+}
+
+.navbar__logo i {
+    font-size: 26px;
+    color:black;
+}
+
+.navbar__menu {
+    display: flex;
+    list-style: none;
+    padding-left: 30px;
+}
+
+.navbar__menu li:hover {
+    background-color: gainsboro;
+    border-radius: 4px;
+}
+
+.navbar__menu li {
+    padding: 8px 12px;
+}
+/* 네비게이션 바 끝 */
+
+/* 내용 작성폼 시작 */
+form {
+    margin: 50px auto;
+    max-width: 1080px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="text"], input[type="number"], input[type="date"], input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: gainsboro;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: black;
+    color: white;
+}
+
+/* 이미지 삽입 폼 */
+.col-12 {
+    padding-top: 20px;
+}
+
+/* 내용 작성폼 끝 */
