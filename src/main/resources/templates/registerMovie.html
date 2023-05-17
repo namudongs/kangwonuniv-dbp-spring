@@ -1,76 +1,104 @@
 <!--영화등록 페이지-->
-<!--담당: 남동현 -->
+<!--담당: -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/registerMovieStyle.css">
-    <script src="https://kit.fontawesome.com/9cc16459ac.js" crossorigin="anonymous"></script>
-    <title>영화 등록</title>
+  <meta charset="UTF-8">
+  <title>Register Movie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    form {
+      margin: 50px auto;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+  </style>
 </head>
-
-<!-- 상단바 -->
 <body>
-    <nav class="navbar">
-        <div class="navbar__logo">
-            <i class="fa-solid fa-film"></i>
-            <a href="">졸업시켜조</a>
-        </div>
-
-        <ul class="navbar__menu">
-            <li><a th:href="@{/movies}">홈</a></li>
-            <li><a th:href="@{/movies}">영화 목록</a></li>
-            <li><a th:href="@{/movies/register}">영화 등록</a></li>
-            <li><a th:href="@{/login}">로그인</a></li>
-            <li><a th:href="@{/signup}">회원가입</a></li>
-        </ul>
-    </nav>
-</body>
-
-<!-- 등록 폼 -->
+<h1>영화등록 페이지</h1>
 <form method="post" action="/movies/register" enctype="multipart/form-data">
-    <div>
-      <label for="title">제목:</label>
-      <input type="text" id="title" name="title" required>
-    </div>
-    <div>
-      <label for="director">감독:</label>
-      <input type="text" id="director" name="director" required>
-    </div>
-    <div>
-      <label for="cast">출연배우:</label>
-      <input type="text" id="cast" name="cast" required>
-    </div>
-    <div>
-      <label for="genre">장르:</label>
-      <input type="text" id="genre" name="genre" required>
-    </div>
-    <div>
-      <label for="runtime">상영시간:</label>
-      <input type="text" id="runtime" name="runtime" required>
-    </div>
-    <div>
-      <label for="rating">관람등급:</label>
-      <input type="text" id="rating" name="rating" required>
-    </div>
-    <div>
-      <label for="releaseDate">개봉일:</label>
-      <input type="date" id="releaseDate" name="releaseDate" required>
-    </div>
-    <div>
-      <label for="country">국가:</label>
-      <input type="text" id="country" name="country" required>
-    </div>
-    <div>
-      <label for="plot">줄거리:</label><br>
-      <textarea id="plot" name="plot" rows="5" cols="141" required></textarea>
-    </div>
-    <div class="col-12">
-      <label class="form-label">영화 이미지 업로드</label>
-      <input type="file" class="form-control" id="imgFile" name="imgFile">
-    </div>
-    <button type="submit">등록하기</button>
-  </form>
+  <div>
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required>
+  </div>
+  <div>
+    <label for="director">감독:</label>
+    <input type="text" id="director" name="director" required>
+  </div>
+  <div>
+    <label for="cast">출연배우:</label>
+    <input type="text" id="cast" name="cast" required>
+  </div>
+  <div>
+    <label for="genre">장르:</label>
+    <input type="text" id="genre" name="genre" required>
+  </div>
+  <div>
+    <label for="runningTime">상영시간:</label>
+    <input type="text" id="runningTime" name="runningTime" required>
+  </div>
+  <div>
+    <label for="rating">관람등급:</label>
+    <input type="text" id="rating" name="rating" required>
+  </div>
+  <div>
+    <label for="releaseDate">개봉일:</label>
+    <input type="date" id="releaseDate" name="releaseDate" required>
+  </div>
+  <div>
+    <label for="country">국가:</label>
+    <input type="text" id="country" name="country" required>
+  </div>
+  <div>
+    <label for="plot">줄거리:</label>
+    <textarea id="plot" name="plot" rows="5" cols="70" required></textarea>
+  </div>
+  <div class="col-12">
+    <label class="form-label">영화 이미지 업로드</label>
+    <input type="file" class="form-control" id="imgFile" name="imgFile">
+  </div>
+  <button type="submit">Register</button>
+</form>
+</body>
 </html>

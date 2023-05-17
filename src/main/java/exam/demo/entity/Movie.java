@@ -34,9 +34,8 @@ public class Movie {
     }
 
     public void setImgPath(String imgPath) {
-        this.ImgPath = imgPath;
+        ImgPath = imgPath;
     }
-
 
     public String getImgName() {
         return ImgName;
