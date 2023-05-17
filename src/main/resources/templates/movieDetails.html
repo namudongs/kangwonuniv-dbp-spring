@@ -1,0 +1,110 @@
+<!--영화 상세페이지-->
+<!--담당: -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="UTF-8">
+  <title th:text="${movie.title} + ' - Movie Detail'">Movie Detail</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F9F9F9;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+    table {
+      width: 90%;
+      margin: 50px auto 0;
+      border-collapse: collapse;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #555;
+      color: #FFF;
+    }
+    tr:nth-child(even) {
+      background-color: #F5F5F5;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+    a {
+      color: #555;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      color: #000;
+    }
+    .movie-detail {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-top: 50px;
+      justify-content: center; /* 추가된 코드 */
+    }
+    .movie-image {
+      flex-basis: 30%;
+      margin-right: 30px;
+    }
+    .movie-info {
+      flex-basis: 70%;
+    }
+    .movie-title {
+      font-weight: bold;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .movie-genre, .movie-director, .movie-cast, .movie-runtime {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    .movie-bookmark {
+      display: block;
+      width: 150px;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #555;
+      color: #FFF;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .movie-bookmark:hover {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+<h1>영화 정보</h1>
+<div class="movie-detail">
+  <div class="movie-image">
+    <img th:src="@{${movie.getImgPath()}}" style="max-width: 100%; display: block; margin: 0 auto;">
+  </div>
+  <div class="movie-info">
+    <h2 class="movie-title" th:text="${movie.title}"></h2>
+    <p class="movie-director" th:text="'감독: ' + ${movie.director}"></p>
+    <p class="movie-cast" th:text="'출연배우: ' + ${movie.cast}"></p>
+    <p class="movie-genre" th:text="'장르: ' + ${movie.genre}"></p>
+    <p class="movie-cast" th:text="'관람등급: ' + ${movie.rating}"></p>
+    <p class="movie-runtime" th:text="'러닝타임: ' + ${movie.runtime} + ' 분'"></p>
+    <p class="movie-cast" th:text="'국가: ' + ${movie.country}"></p>
+    <p class="movie-cast" th:text="'개봉일: ' + ${movie.releaseDate}"></p>
+    <p class="movie-cast" th:text="'줄거리: ' + ${movie.plot}"></p>
+    <p class="movie-cast" th:text="'영화아이디: ' + ${movie.movie_id}"></p>
+    <a href="#" class="movie-bookmark">예매하기</a>
+    <a th:href="@{/movies/{id}/reviews/new(id=${movie.movie_id})}" class="button">한줄리뷰</a>
+  </div>
+</div>
+</body>
+</html>
