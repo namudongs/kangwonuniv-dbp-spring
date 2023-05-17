@@ -101,6 +101,12 @@ button[type="submit"]:hover {
     color: white;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 /* 이미지 삽입 폼 */
 .col-12 {
     padding-top: 20px;
