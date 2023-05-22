@@ -1,0 +1,41 @@
+<!--영화 리뷰 작성 페이지-->
+<!--담당: -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Review 작성</title>
+</head>
+<style>
+.movie-image {
+flex-basis: 30%;
+margin-right: 30px;
+  width: 500px;
+  height: 700px;
+}
+</style>
+<body>
+<h1>Review 작성</h1>
+
+<div class="movie-image" >
+  <img th:src="@{${movie.getImgPath()}}" style="max-width: 100%; display: block; margin: 0 auto;">
+</div>
+<h2 class="movie-title" th:text="${movie.title}"></h2>
+<form method="POST" th:action="@{'/movies/' + ${movie.movie_id} + '/reviews/new'}">
+
+  <label for="rating">평점:</label><br>
+  <select id="rating" name="rating">
+    <option value="5">5</option>
+    <option value="4">4</option>
+    <option value="3">3</option>
+    <option value="2">2</option>
+    <option value="1">1</option>
+  </select><br>
+
+  <label for="content">리뷰 내용:</label><br>
+  <textarea id="content" name="content"></textarea><br>
+
+  <input type="submit" value="작성">
+</form>
+</body>
+</html>

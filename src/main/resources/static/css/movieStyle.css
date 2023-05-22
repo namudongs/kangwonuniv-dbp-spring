@@ -111,19 +111,3 @@ a { text-decoration: none; color: black; }
     background-color: #0076a3;
 }
 /* 영화 버튼 끝 */
-
-/* 반응형 */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi) {
-    .movie-list-title {
-        font-size: 30px;
-        text-align: center;
-    }
-    .movie-container {
-        height: 700px;
-    }
-    .movie-poster img {
-        width: 340px;
-        height: 550px;
-    }
-}
