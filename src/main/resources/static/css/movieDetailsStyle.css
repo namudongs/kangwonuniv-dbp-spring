@@ -174,17 +174,11 @@ a { text-decoration: none; color: black; }
 
 
 /*관람등급 이미지*/
-.rating-img{
-    display: inline-block;
-    vertical-align: middle;
-    width: 30px;
-    max-width: 100%;
-    overflow: hidden;
-}
 .rating-img img {
     display: inline-block;
     vertical-align: middle;
-    max-width: none;
+    width: 25px;
+    height: auto;
 }
 
 
