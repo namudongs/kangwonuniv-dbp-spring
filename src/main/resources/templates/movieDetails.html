@@ -57,20 +57,20 @@
         <dt>관람등급</dt>
         <dd>
           <span class="rating-img">
-            <img id="rating-image" src="https://i.imgur.com/GEsCj1h.png" alt="(영등위 관람등급)">
+            <img id="rating-image" src="https://i.imgur.com/RusTUUR.png" alt="(영등위 관람등급)">
           </span>
           <span id="rating-v" class="rating-value" th:text="${movie.rating}"></span>
           <!--관람등급에 따라 해당하는 관람등급 이미지 불러옴-->
           <script>
             switch(document.getElementById("rating-v").innerHTML) {
                 case "전체 관람가":
-                    document.getElementById("rating-image").src = "https://i.imgur.com/KImUwjJ.png";
+                    document.getElementById("rating-image").src = "https://i.imgur.com/Zj4yWzM.png";
                     break;
                 case "12세 이상 관람가":
-                    document.getElementById("rating-image").src = "https://i.imgur.com/PLmYLbb.png";
+                    document.getElementById("rating-image").src = "https://i.imgur.com/6uLoH8S.png";
                     break;
                 case "15세 이상 관람가":
-                    document.getElementById("rating-image").src = "https://i.imgur.com/X1VDiyX.png";
+                    document.getElementById("rating-image").src = "https://i.imgur.com/LMd9bst.png";
                     break;
             }
           </script>
