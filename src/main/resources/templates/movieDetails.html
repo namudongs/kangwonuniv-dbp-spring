@@ -40,7 +40,7 @@
         <div class="movie-element">
             <h2 class="movie-title" th:text="${movie.title}"></h2>
             <a href="@{/movies/reserve/{id}(id=${movie.movie_id})}" class="reserve-button">예매하기</a>
-            <a th:href="@{/movies/{id}/reviews/new(id=${movie.movie_id})}" class="review-button">한줄리뷰</a>
+            <a th:href="@{/movies/{id}/reviews/new(id=${movie.movie_id})}" th:if="${session.loggedIn}" class="review-button">한줄리뷰</a>
             <a th:href="@{/movies/{id}/delete(id=${movie.movie_id})}" th:if="${#request.isUserInRole('ADMIN')}" class="review-button">영화삭제</a>
             <a th:href="@{/movies/{id}/modify(id=${movie.movie_id})}" th:if="${#request.isUserInRole('ADMIN')}" class="review-button">영화정보 수정</a>
 
