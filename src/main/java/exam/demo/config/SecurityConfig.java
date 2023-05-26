@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .failureUrl("/login/error")
                 .successHandler((request, response, authentication) -> {
                     request.getSession().setAttribute("loggedIn", true);
-                    response.sendRedirect("/");
+                    response.sendRedirect("/movies");
                 })
 
                 .and()
