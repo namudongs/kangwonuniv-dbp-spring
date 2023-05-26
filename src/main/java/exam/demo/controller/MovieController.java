@@ -26,7 +26,7 @@ public class MovieController {
     private final ReviewService reviewService;
     private final MemberService memberService;
 
-    @GetMapping("/movies")
+    @GetMapping( value = {"/", "/movies"})
     public String showAllMovies(Model model) {
         List<Movie> movies = movieService.getAllMovies();
         model.addAttribute("movies", movies);
