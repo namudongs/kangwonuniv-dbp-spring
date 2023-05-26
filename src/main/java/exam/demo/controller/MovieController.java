@@ -1,6 +1,5 @@
 package exam.demo.controller;
 
-
 import exam.demo.dto.MovieDto;
 import exam.demo.entity.Member;
 import exam.demo.entity.Movie;
@@ -21,7 +20,6 @@ import java.security.Principal;
 import java.util.List;
 
 
-
 @Controller
 @RequiredArgsConstructor
 public class MovieController {
@@ -29,6 +27,7 @@ public class MovieController {
     private final MovieService movieService;
     private final ReviewService reviewService;
     private final MemberService memberService;
+
     @GetMapping("/movies")
     public String showAllMovies(Model model) {
         List<Movie> movies = movieService.getAllMovies();
