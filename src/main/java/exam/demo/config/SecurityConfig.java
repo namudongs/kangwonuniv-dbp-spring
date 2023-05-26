@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .failureUrl("/login/error")
                 .successHandler((request, response, authentication) -> {
                     request.getSession().setAttribute("loggedIn", true);
-                    response.sendRedirect("/movies");
+                    response.sendRedirect("/");
                 })
 
                 .and()
@@ -65,6 +65,6 @@ public class SecurityConfig {
         if (referer != null) {
             return referer;
         }
-        return "/movies"; // 이전 페이지의 URL이 없으면 기본적으로 홈 페이지로 리다이렉트
+        return "/"; // 이전 페이지의 URL이 없으면 기본적으로 홈 페이지로 리다이렉트
     }
 }
