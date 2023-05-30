@@ -2,12 +2,10 @@ package exam.demo.entity;
 
 import exam.demo.dto.ReviewDto;
 import lombok.*;
-
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
-@Data
 @Entity
 public class Review {
 
@@ -18,6 +16,7 @@ public class Review {
     private Long movieId;
     @Column
     private Long memberId;
+
     @Column
     private Integer rating;
     @Column

@@ -48,7 +48,7 @@ public class ReviewController {
         Member member = memberService.getMemberByUsername(principal.getName());
 
         Review review = new Review(reviewDto);
-        review.updateIds(member.getMember_id(), movieId);
+        review.updateIds(member.getMemberId(), movieId);
 
         reviewService.createReview(review);
         return "redirect:/movies/" + movieId;
