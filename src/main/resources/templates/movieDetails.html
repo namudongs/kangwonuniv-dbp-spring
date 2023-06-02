@@ -128,8 +128,8 @@
 
                 <!-- 현재 로그인한 유저의 ID와 review.memberId를 비교하여 조건에 따라 버튼 표시 -->
                 <div th:if="${loggedInUserId == review.memberId.toString()} or ${#request.isUserInRole('ADMIN')}" class="control-button">
-                    <a th:if="${loggedInUserId == review.memberId.toString()}" th:href="@{/movies/{movieId}/reviews/{reviewId}/modify(movieId=${movie.movie_id}, reviewId=${review.review_id})}" class="btn btn-sm btn-danger">수정</a>
-                    <a th:href="@{/movies/{movieId}/reviews/{reviewId}/delete(movieId=${movie.movie_id}, reviewId=${review.review_id})}" class="btn btn-sm btn-danger">삭제</a>
+                    <a th:if="${loggedInUserId == review.memberId.toString()}" th:href="@{/movies/{movieId}/reviews/{reviewId}/modify(movieId=${movie.movieId}, reviewId=${review.review_id})}" class="btn btn-sm btn-danger">수정</a>
+                    <a th:href="@{/movies/{movieId}/reviews/{reviewId}/delete(movieId=${movie.movieId}, reviewId=${review.review_id})}" class="btn btn-sm btn-danger">삭제</a>
                 </div>
             </div>
             <p class="review-content" th:text="${review.content}"></p>
