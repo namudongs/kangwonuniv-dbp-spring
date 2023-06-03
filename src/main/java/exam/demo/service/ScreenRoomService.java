@@ -36,4 +36,8 @@ public class ScreenRoomService {
     public void deleteScreenRoom(ScreenRoom screenRoom) {
         screenRoomRepository.delete(screenRoom);
     }
+
+    public List<ScreenRoom> getScreensByTheater(Long theaterId) {
+        return screenRoomRepository.findByTheaterId(theaterId);
+    }
 }

@@ -45,4 +45,15 @@ public class ScheduleService {
         Schedule schedule = getScheduleById(scheduleId);
         scheduleRepository.delete(schedule);
     }
+
+    public List<Schedule> getSchedulesByScreenRoom(Long screenRoomId) {
+        return scheduleRepository.findByScreenRoomId(screenRoomId);
+    }
+
+    public List<Boolean> getSeatStatusByScheduleId(Long scheduleId) {
+        Schedule schedule = getScheduleById(scheduleId);
+        return schedule.getSeatStatus();
+    }
+
+
 }

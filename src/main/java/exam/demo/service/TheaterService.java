@@ -75,5 +75,17 @@ public class TheaterService {
         theaterRepository.save(theater);
     }
 
+    public List<Theater> getTheatersByMovieId(Long movieId) {
+        List<Theater> theaters = theaterRepository.findAll();
+        List<Theater> movieTheaters = new ArrayList<>();
+        for (Theater theater : theaters) {
+            List<Long> screenMovies = theater.getScreenMovies();
+            if (screenMovies.contains(movieId)) {
+                movieTheaters.add(theater);
+            }
+        }
+        return movieTheaters;
+    }
+
 
 }

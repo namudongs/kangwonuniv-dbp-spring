@@ -26,7 +26,7 @@ public class Schedule {
 
     public void initSeatStatus(ScreenRoom screenRoom) {
         int seatCount = screenRoom.getSeatCount();
-        seatStatus = new ArrayList<>(Collections.nCopies(seatCount, false));
+        seatStatus = new ArrayList<>(Collections.nCopies(seatCount, true));
     }
 
     public Schedule(ScheduleDto scheduleDto){
@@ -41,8 +41,5 @@ public class Schedule {
         this.startTime = scheduleDto.getStartTime();
         this.endTime = scheduleDto.getEndTime();
     }
-
-
-
 
 }
