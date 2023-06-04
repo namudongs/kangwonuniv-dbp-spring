@@ -12,4 +12,5 @@ public class ReservationDto {
     private String startTime;
 
     private String memberId;
+    private String seatInfo;
 }

@@ -27,5 +27,9 @@ public class Seat {
         this.price = seatDto.getPrice();
     }
 
+    public void updateSeatStatus(String seatStatus)
+    {
+        this.status = seatStatus;
+    }
 
 }

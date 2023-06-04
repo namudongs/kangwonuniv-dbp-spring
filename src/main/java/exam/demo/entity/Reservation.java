@@ -21,6 +21,7 @@ public class Reservation {
     private String movieName;
     private String startTime;
     private String memberId;
+    private String seatInfo;
 
 
     public Reservation(ReservationDto reservationDto){
@@ -29,6 +30,7 @@ public class Reservation {
         this.movieName = reservationDto.getMovieName();
         this.startTime = reservationDto.getStartTime();
         this.memberId = reservationDto.getMemberId();
+        this.seatInfo = reservationDto.getSeatInfo();
     }
 
 }

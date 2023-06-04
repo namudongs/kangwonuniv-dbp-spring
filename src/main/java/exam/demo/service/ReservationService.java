@@ -37,8 +37,10 @@ public class ReservationService {
         reservationDto.setMovieName(movie.getTitle());
         reservationDto.setStartTime(schedule.getStartTime());
         reservationDto.setMemberId(principal.getName());
-
+        reservationDto.setSeatInfo(seat.getSeatRowNumber()+ "행 " + seat.getSeatRowNumber() + "열 ");
         Reservation reservation = new Reservation(reservationDto);
+        seat.updateSeatStatus("UNAVAILABLE");
+        seatService.updateSeatStatus(seat);
 
         reservationRepository.save(reservation);
     }

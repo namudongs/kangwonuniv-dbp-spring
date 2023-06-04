@@ -36,6 +36,10 @@ public class SeatService {
         return seatRepository.saveAll(seats);
     }
 
+    public void updateSeatStatus(Seat seat){
+        seatRepository.save(seat);
+    }
+
 
     public void deleteSeatsByScheduleId(Long scheduleId) {
         seatRepository.deleteByScheduleId(scheduleId);
