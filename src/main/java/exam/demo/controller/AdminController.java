@@ -4,35 +4,32 @@ import exam.demo.dto.ScheduleDto;
 import exam.demo.dto.ScreenRoomDto;
 import exam.demo.dto.TheaterDto;
 
-import exam.demo.entity.Movie;
-import exam.demo.entity.Schedule;
-import exam.demo.entity.ScreenRoom;
-import exam.demo.entity.Theater;
+import exam.demo.entity.*;
 import exam.demo.repository.TheaterRepository;
-import exam.demo.service.MovieService;
-import exam.demo.service.ScheduleService;
-import exam.demo.service.ScreenRoomService;
-import exam.demo.service.TheaterService;
+import exam.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Transactional
 public class AdminController {
 
     private final TheaterRepository theaterRepository;
     private final TheaterService theaterService;
     private final MovieService movieService;
-    private final ScreenRoomService screenRoomService;
+    private final ScreenroomService screenRoomService;
     private final ScheduleService scheduleService;
+
+    private final SeatService seatService;
 
     @GetMapping("/adminPage")
     public String showAddTheaterForm(Model model) {
@@ -44,11 +41,22 @@ public class AdminController {
         List<Theater> theaters = theaterService.getAllTheater();
         model.addAttribute("theaters", theaters);
 
-        List<ScreenRoom> screenrooms = screenRoomService.getAllScreenRooms();
+        List<Screenroom> screenrooms = screenRoomService.getAllScreenRooms();
         model.addAttribute("screenrooms", screenrooms);
 
         List<Schedule> schedules = scheduleService.getAllSchedules();
         model.addAttribute("schedules", schedules);
+
+        List<Integer> totalSeatsList = new ArrayList<>();
+        List<Integer> availableSeatsList = new ArrayList<>();
+        for (Schedule schedule : schedules) {
+            int totalSeats = seatService.getTotalSeatsByScheduleId(schedule.getScheduleId());
+            int availableSeats = seatService.getAvailableSeatsByScheduleId(schedule.getScheduleId());
+            totalSeatsList.add(totalSeats);
+            availableSeatsList.add(availableSeats);
+        }
+        model.addAttribute("totalSeatsList", totalSeatsList);
+        model.addAttribute("availableSeatsList", availableSeatsList);
 
         return "/adminPage";
     }
@@ -104,14 +112,14 @@ public class AdminController {
     //상영관 컨트롤러들
     @PostMapping("/screenroom/new")
     public String addScreenRoom(@ModelAttribute ScreenRoomDto screenRoomDto) {
-        ScreenRoom screenroom = new ScreenRoom(screenRoomDto);
+        Screenroom screenroom = new Screenroom(screenRoomDto);
         screenRoomService.createScreenRoom(screenroom);
         return "redirect:/admin/adminPage";
     }
 
     @GetMapping("/screenroom/{screenroomId}/edit")
     public String showScreenroomEditForm(@PathVariable Long screenroomId, Model model){
-        ScreenRoom screenroom = screenRoomService.getScreenRoomById(screenroomId);
+        Screenroom screenroom = screenRoomService.getScreenRoomById(screenroomId);
         model.addAttribute("screenroom", screenroom);
         List<Theater> theaters = theaterService.getAllTheater();
         model.addAttribute("theaters", theaters);
@@ -121,7 +129,7 @@ public class AdminController {
 
     @PostMapping("/update/{screenroomId}")
     public String editScreenroom(@PathVariable Long screenroomId, @ModelAttribute ScreenRoomDto screenRoomDto) {
-        ScreenRoom screenRoom = screenRoomService.getScreenRoomById(screenroomId);
+        Screenroom screenRoom = screenRoomService.getScreenRoomById(screenroomId);
         screenRoomService.updateScreenRoom(screenRoom, screenRoomDto);
 
         return "redirect:/admin/adminPage";
@@ -130,7 +138,7 @@ public class AdminController {
 
     @GetMapping ("/screenroom/{ScreenRoomId}/delete")
     public String deleteScreenroom(@PathVariable Long ScreenRoomId, Model model){
-        ScreenRoom screenRoom = screenRoomService.getScreenRoomById(ScreenRoomId);
+        Screenroom screenRoom = screenRoomService.getScreenRoomById(ScreenRoomId);
         screenRoomService.deleteScreenRoom(screenRoom);
         return "redirect:/admin/adminPage";
     }
@@ -149,7 +157,7 @@ public class AdminController {
     public String showScheduleEditForm(@PathVariable Long scheduleId, Model model){
         Schedule schedule = scheduleService.getScheduleById(scheduleId);
         model.addAttribute("schedule", schedule);
-        List<ScreenRoom> screenrooms = screenRoomService.getAllScreenRooms();
+        List<Screenroom> screenrooms = screenRoomService.getAllScreenRooms();
         model.addAttribute("screenrooms", screenrooms);
 
         return "ScheduleEditForm";
@@ -169,7 +177,20 @@ public class AdminController {
         return "redirect:/admin/adminPage";
     }
 
-    ///상영일정 컨트롤러들
+    ///좌석 컨트롤러
+    @PostMapping("/seats/create/")
+    public String createSeats(@RequestParam Long scheduleId, @RequestParam int numRows, @RequestParam int numSeatsPerRow) {
+        seatService.createSeats(scheduleId, numRows, numSeatsPerRow);
+
+        return "redirect:/admin/adminPage";
+    }
+    @PostMapping("/seats/delete/")
+    public String deleteSeats(@RequestParam Long scheduleId) {
+        seatService.deleteSeatsByScheduleId(scheduleId);
+
+        return "redirect:/admin/adminPage";
+    }
+
 
 
 

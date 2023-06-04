@@ -119,7 +119,6 @@
         <th>ID</th>
         <th>상영관 이름</th>
         <th>소속 영화관</th>
-        <th>총 좌석수</th>
         <th>수정</th>
         <th>삭제</th>
       </tr>
@@ -130,7 +129,7 @@
         <td th:text="${screenroom.screenroomId}"></td>
         <td th:text="${screenroom.screenroomName}"></td>
         <td th:text="${screenroom.theaterId}"></td>
-        <td th:text="${screenroom.seatCount}"></td>
+
         <td>
           <!-- 상영관 수정 페이지로 이동하는 링크를 추가합니다. -->
           <a th:href="@{/admin/screenroom/{screenroomId}/edit(screenroomId=${screenroom.screenroomId})}">수정</a>
@@ -152,8 +151,7 @@
       </select><br>
       <label for="screenroomName">상영관 이름:</label>
       <input type="text" id="screenroomName" name="screenroomName"><br>
-      <label for="seatCount">총 좌석수:</label>
-      <input type="text" id="seatCount" name="seatCount"><br>
+
       <button type="submit">등록</button>
     </form>
 
@@ -178,12 +176,11 @@
       <tbody>
       <!-- 서버에서 받은 데이터를 반복하여 테이블에 표시합니다. -->
 
-      <tr th:each="schedule : ${schedules}">
+      <tr th:each="schedule, i : ${schedules}">
         <td th:text="${schedule.scheduleId}"></td>
-        <td th:text="${schedule.screenRoomId}"></td>
+        <td th:text="${schedule.screenroomId}"></td>
         <td th:text="${schedule.movieId}"></td>
-        <td th:text="${#lists.size(schedule.seatStatus.?[false])} + '/' + ${schedule.seatStatus.size()}"></td>
-
+        <td th:text=" ${totalSeatsList[i.index]} - ${availableSeatsList[i.index]} +'/'+${totalSeatsList[i.index]}"></td>
 
         <td th:text="${schedule.startTime}"></td>
         <td th:text="${schedule.endTime}"></td>
@@ -202,7 +199,7 @@
     <h2>상영일정 등록</h2>
     <form th:action="@{/admin/schedule/create}" method="post">
       <label for="screenRoomId">상영관:</label>
-      <select id="screenRoomId" name="screenRoomId">
+      <select id="screenroomId" name="screenroomId">
         <option value="">상영관 선택</option>
         <option th:each="screenroom : ${screenrooms}" th:value="${screenroom.screenroomId}" th:text="${screenroom.screenroomName}"></option>
       </select><br>
@@ -219,6 +216,34 @@
       <br>
       <button type="submit">등록</button>
     </form>
+  </div>
+  <div>
+
+    <h2>좌석 crud</h2>
+    <!-- 좌석 생성 폼 -->
+    <form th:action="@{/admin/seats/create/}" method="post">
+      <label for="scheduleId">상영일정 선택:</label>
+      <select id="scheduleId" name="scheduleId" required>
+        <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}" th:text="${schedule.scheduleId}"></option>
+      </select><br>
+      <label for="numRows">행 수:</label>
+      <input type="number" id="numRows" name="numRows" min="1" required><br>
+      <label for="numSeatsPerRow">한 행당 좌석 수:</label>
+      <input type="number" id="numSeatsPerRow" name="numSeatsPerRow" min="1" required><br>
+      <button type="submit">생성</button>
+    </form>
+    <form th:action="@{/admin/seats/delete/}" method="post">
+      <label for="scheduleId">상영일정 선택:</label>
+      <select id="scheduleId" name="scheduleId" required>
+        <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}" th:text="${schedule.scheduleId}"></option>
+      </select><br>
+      <button type="submit">삭제</button>
+    </form>
+
+
+
+
+
   </div>
 </div>
 

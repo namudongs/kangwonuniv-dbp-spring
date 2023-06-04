@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ScheduleDto {
-    private Long screenRoomId;
+    private Long screenroomId;
     private Long movieId;
     private String startTime;
     private String endTime;

@@ -1,8 +1,8 @@
 package exam.demo.service;
 
 import exam.demo.dto.ScreenRoomDto;
-import exam.demo.entity.ScreenRoom;
-import exam.demo.repository.ScreenRoomRepository;
+import exam.demo.entity.Screenroom;
+import exam.demo.repository.ScreenroomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,34 +10,33 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ScreenRoomService {
-    private final ScreenRoomRepository screenRoomRepository;
+public class ScreenroomService {
+    private final ScreenroomRepository screenRoomRepository;
 
 
-
-    public List<ScreenRoom> getAllScreenRooms() {
+    public List<Screenroom> getAllScreenRooms() {
         return screenRoomRepository.findAll();
     }
 
-    public ScreenRoom getScreenRoomById(Long screenRoomId) {
+    public Screenroom getScreenRoomById(Long screenRoomId) {
         return screenRoomRepository.findById(screenRoomId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Screen Room ID: " + screenRoomId));
     }
 
-    public ScreenRoom createScreenRoom(ScreenRoom screenRoom) {
+    public Screenroom createScreenRoom(Screenroom screenRoom) {
         return screenRoomRepository.save(screenRoom);
     }
 
-    public void updateScreenRoom(ScreenRoom screenRoom, ScreenRoomDto screenRoomDto) {
+    public void updateScreenRoom(Screenroom screenRoom, ScreenRoomDto screenRoomDto) {
         screenRoom.updateScreenroom(screenRoomDto);
         screenRoomRepository.save(screenRoom);
     }
 
-    public void deleteScreenRoom(ScreenRoom screenRoom) {
+    public void deleteScreenRoom(Screenroom screenRoom) {
         screenRoomRepository.delete(screenRoom);
     }
 
-    public List<ScreenRoom> getScreensByTheater(Long theaterId) {
+    public List<Screenroom> getScreensByTheater(Long theaterId) {
         return screenRoomRepository.findByTheaterId(theaterId);
     }
 }

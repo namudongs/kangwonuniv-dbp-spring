@@ -2,20 +2,18 @@ package exam.demo.service;
 
 import exam.demo.dto.ScheduleDto;
 import exam.demo.entity.Schedule;
-import exam.demo.entity.ScreenRoom;
+import exam.demo.entity.Screenroom;
 import exam.demo.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
-    private final ScreenRoomService screenRoomService;
+    private final ScreenroomService screenRoomService;
 
     public List<Schedule> getAllSchedules() {
         return scheduleRepository.findAll();
@@ -29,8 +27,8 @@ public class ScheduleService {
     public Schedule createSchedule(ScheduleDto scheduleDto) {
 
         Schedule schedule = new Schedule(scheduleDto);
-        ScreenRoom screenRoom = screenRoomService.getScreenRoomById(scheduleDto.getScreenRoomId());
-        schedule.initSeatStatus(screenRoom);
+        Screenroom screenRoom = screenRoomService.getScreenRoomById(scheduleDto.getScreenroomId());
+
 
         return scheduleRepository.save(schedule);
     }
@@ -47,13 +45,10 @@ public class ScheduleService {
     }
 
     public List<Schedule> getSchedulesByScreenRoom(Long screenRoomId) {
-        return scheduleRepository.findByScreenRoomId(screenRoomId);
+        return scheduleRepository.findByScreenroomId(screenRoomId);
     }
 
-    public List<Boolean> getSeatStatusByScheduleId(Long scheduleId) {
-        Schedule schedule = getScheduleById(scheduleId);
-        return schedule.getSeatStatus();
-    }
+
 
 
 }

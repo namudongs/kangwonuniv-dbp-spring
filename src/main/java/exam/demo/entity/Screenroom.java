@@ -11,25 +11,25 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ScreenRoom {
+public class Screenroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long screenroomId;
     private Long theaterId;
     private String screenroomName;
-    private int seatCount;
 
-    public ScreenRoom(ScreenRoomDto screenRoomDto){
+
+    public Screenroom(ScreenRoomDto screenRoomDto){
         this.theaterId = screenRoomDto.getTheaterId();
         this.screenroomName = screenRoomDto.getScreenroomName();
-        this.seatCount = screenRoomDto.getSeatCount();
+
     }
 
     public void updateScreenroom(ScreenRoomDto screenRoomDto){
         this.theaterId = screenRoomDto.getTheaterId();
         this.screenroomName = screenRoomDto.getScreenroomName();
-        this.seatCount = screenRoomDto.getSeatCount();
+
     }
 
 

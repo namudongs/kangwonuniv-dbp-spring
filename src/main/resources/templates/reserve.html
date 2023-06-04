@@ -1,214 +1,198 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Reservation Page</title>
-  <style>
-    .container {
-      display: flex;
-    }
+    <meta charset="UTF-8">
+    <title>Reservation Page</title>
+    <style>
+        .container {
+            display: flex;
+        }
 
-    .theater-list {
-      flex: 1;
-    }
+        .theater-list {
+            flex: 1;
+        }
 
-    .screen-list {
-      flex: 2;
-    }
+        .screen-list {
+            flex: 2;
+        }
 
-    .theater-item {
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
+        .theater-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
 
-    .seat-chart {
-      display: flex;
-      flex-wrap: wrap;
-    }
+        .screen-list {
+            display: none;
+        }
 
-    .seat {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 5px;
-      text-align: center;
-      line-height: 30px;
-      cursor: pointer;
-    }
+        .screen-list.show {
+            display: block;
+        }
 
-    .available {
-      background-color: green;
-      color: white;
-    }
+        .schedule-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
 
-    .unavailable {
-      background-color: red;
-      color: white;
-      cursor: not-allowed;
-    }
+        .seat-list {
+            display: none;
+            margin-top: 20px;
+        }
 
-    .selected {
-      background-color: blue;
-      color: white;
-    }
+        .seat-list.show {
+            display: block;
+        }
 
-    #seatChartContainer {
-      background-color: #f1f1f1;
-      padding: 10px;
-      display: none;
-    }
-  </style>
+        .seat-item {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .seat-item {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin: 2px;
+            background-color: #EAEAEA;
+            border: 1px solid #CCCCCC;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .seat-item.available {
+            background-color: #4CAF50;
+            color: #FFFFFF;
+        }
+
+        .seat-item.unavailable {
+            background-color: #F44336;
+            color: #FFFFFF;
+        }
+
+        .seat-item.selected {
+            background-color: #FF9800;
+        }
+    </style>
 </head>
+
 <body>
 <div class="container">
-  <div class="theater-list">
-    <h2>Movie Theaters</h2>
-    <ul>
-      <li th:each="theater : ${movieTheaters}" class="theater-item" th:onclick="'selectTheater(' + ${theater.theaterId} + ')'">
-        <p>Theater Name: <span th:text="${theater.theaterName}"></span></p>
-        <p>Theater Location: <span th:text="${theater.theaterLocal}"></span></p>
-        <hr>
-      </li>
-    </ul>
-  </div>
-  <div class="screen-list">
-    <h2>Screens</h2>
-    <ul id="screenList">
-      <!-- Screens will be dynamically populated here -->
-    </ul>
-  </div>
+    <div class="theater-list">
+        <h2>영화관 목록</h2>
+        <ul>
+            <li th:each="theater : ${movieTheaters}" class="theater-item" th:onclick="'selectTheater(\'' + ${theater.theaterId} + '\')'">
+                <p>영화관 이름: <span th:text="${theater.theaterName}"></span></p>
+                <p>영화관 위치: <span th:text="${theater.theaterLocal}"></span></p>
+                <hr>
+            </li>
+        </ul>
+    </div>
+    <div class="screen-list">
+        <h2>상영관 목록</h2>
+        <ul id="screenList">
+            <li th:each="screen : ${screenrooms}" class="screen-item" th:data-theaterid="${screen.theaterId}">
+                <p>상영관 이름: <span th:text="${screen.screenroomName}"></span></p>
+                <ul class="schedule-list" th:each="schedule : ${schedules}" th:if="${schedule.screenroomId == screen.screenroomId}">
+                    <li class="schedule-item" th:onclick="'selectSchedule(\'' + ${schedule.scheduleId} + '\')'" th:data-scheduleid="${schedule.scheduleId}" >
+                        상영 일정 ID: <span th:text="${schedule.scheduleId}"></span><br>
+                        시작 시간: <span th:text="${schedule.startTime}"></span><br>
+                        종료 시간: <span th:text="${schedule.endTime}"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>
-<div id="seatChartContainer">
-  <h2>Seat Chart</h2>
-  <div id="seatChart"></div>
-  <button id="reserveButton" style="display: none">Reserve</button>
-</div>
-<script th:inline="javascript">
-  let selectedSeatIndex = -1;
-  let selectedScheduleId = -1;
 
-  function selectTheater(theaterId) {
-    // Fetch screens for the selected theater using AJAX
-    fetch(`/movies/theaters/${theaterId}/screens`)
+<form id="reservationForm" action="/movies/reserve/check" method="post">
+    <input type="text" id="theaterIdInput" name="theaterId" value="">
+    <input type="text" id="scheduleIdInput" name="scheduleId" value="">
+    <input type="text" id="seatIdInput" name="seatId" value="">
+    <button type="submit">예매하기</button>
+</form>
+
+<div class="seat-list">
+    <h2>좌석 목록</h2>
+    <div id="seatList">
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function selectTheater(theaterId) {
+        const screenItems = document.querySelectorAll('.screen-item');
+        screenItems.forEach(screenItem => {
+            const itemTheaterId = screenItem.getAttribute('data-theaterid');
+            if (itemTheaterId === theaterId) {
+                screenItem.style.display = 'block';
+            } else {
+                screenItem.style.display = 'none';
+            }
+        });
+        const screenList = document.querySelector('.screen-list');
+        screenList.classList.add('show');
+
+        // Set theater ID input value
+        const theaterIdInput = document.getElementById('theaterIdInput');
+        theaterIdInput.value = theaterId;
+    }
+
+    function selectSchedule(scheduleId) {
+        // Set schedule ID input value
+        const scheduleIdInput = document.getElementById('scheduleIdInput');
+        scheduleIdInput.value = scheduleId;
+
+        // Fetch seats by schedule ID
+        fetchSeats(scheduleId);
+    }
+
+    function fetchSeats(scheduleId) {
+        fetch('/movies/admin/seats/' + scheduleId)
             .then(response => response.json())
             .then(data => {
-              const screenList = document.getElementById('screenList');
-              screenList.innerHTML = '';
+                const seatList = document.getElementById('seatList');
+                seatList.innerHTML = '';
 
-              data.forEach(screen => {
-                const li = document.createElement('li');
-                li.textContent = `Screen Name: ${screen.screenroomName}`;
-                screenList.appendChild(li);
+                data.forEach(seat => {
+                    const seatItem = document.createElement('div');
+                    seatItem.classList.add('seat-item');
 
-                // Fetch schedules for the selected screen using AJAX
-                fetch(`/movies/screens/${screen.screenroomId}/schedules`)
-                        .then(response => response.json())
-                        .then(schedules => {
-                          const ul = document.createElement('ul');
-                          schedules.filter(schedule => schedule.movieId === /*[[${movieId}]]*/).forEach(schedule => {
-                            const scheduleLi = document.createElement('li');
-                            scheduleLi.textContent = `Start Time: ${schedule.startTime} / End Time: ${schedule.endTime}`;
-                            ul.appendChild(scheduleLi);
+                    if (seat.status === 'AVAILABLE') {
+                        seatItem.classList.add('available');
+                    } else if (seat.status === 'UNAVAILABLE') {
+                        seatItem.classList.add('unavailable');
+                    }
 
-                            // Add click event listener to schedule
-                            scheduleLi.addEventListener('click', () => {
-                              selectedScheduleId = schedule.scheduleId;
-                              // Fetch seat status for the selected schedule using AJAX
-                              fetch(`/movies/schedules/${schedule.scheduleId}/seatstatus`)
-                                      .then(response => response.json())
-                                      .then(seatStatus => {
-                                        renderSeatChart(seatStatus);
-                                      })
-                                      .catch(error => console.error(error));
-                            });
-                          });
-                          li.appendChild(ul);
-                        })
-                        .catch(error => console.error(error));
-              });
+                    seatItem.innerText = seat.seatNumber;
+                    seatItem.dataset.seatId = seat.seatId;
+                    seatItem.addEventListener('click', function() {
+                        selectSeat(seat);
+                    });
+
+                    seatList.appendChild(seatItem);
+                });
+
+                const seatListContainer = document.querySelector('.seat-list');
+                seatListContainer.classList.add('show');
             })
-            .catch(error => console.error(error));
-  }
-
-  function renderSeatChart(seatStatus) {
-    const seatChartContainer = document.getElementById('seatChartContainer');
-    seatChartContainer.style.display = 'block';
-
-    const seatChart = document.getElementById('seatChart');
-    seatChart.innerHTML = '';
-
-    const seatChartElement = document.createElement('div');
-    seatChartElement.classList.add('seat-chart');
-
-    seatStatus.forEach((isSeatAvailable, seatIndex) => {
-      const seatElement = document.createElement('div');
-      seatElement.textContent = `Seat ${seatIndex + 1}`;
-      seatElement.classList.add('seat');
-
-      if (isSeatAvailable) {
-        seatElement.classList.add('available');
-      } else {
-        seatElement.classList.add('unavailable');
-        seatElement.style.cursor = 'not-allowed';
-      }
-
-      seatChartElement.appendChild(seatElement);
-    });
-
-    seatChart.appendChild(seatChartElement);
-    document.getElementById('reserveButton').style.display = 'block';
-  }
-
-  // Add click event listener to seatChartContainer
-  const seatChartContainer = document.getElementById('seatChartContainer');
-  seatChartContainer.addEventListener('click', event => {
-    // Check if the clicked element is a seat
-    if (event.target.classList.contains('seat')) {
-      const selectedSeatElement = event.target;
-      const seatIndex = Array.from(selectedSeatElement.parentNode.children).indexOf(selectedSeatElement);
-
-      if (selectedSeatIndex === seatIndex) {
-        // Deselect seat
-        selectedSeatElement.classList.remove('selected');
-        selectedSeatIndex = -1;
-      } else {
-        // Select seat
-        if (selectedSeatIndex !== -1) {
-          // Deselect previously selected seat
-          const prevSelectedSeatElement = document.querySelector('.seat.selected');
-          if (prevSelectedSeatElement) {
-            prevSelectedSeatElement.classList.remove('selected');
-          }
-        }
-        selectedSeatElement.classList.add('selected');
-        selectedSeatIndex = seatIndex;
-      }
+            .catch(error => console.error('Error:', error));
     }
-  });
 
-  // Add click event listener to reserveButton
-  const reserveButton = document.getElementById('reserveButton');
-  reserveButton.addEventListener('click', () => {
-    // ...
+    function selectSeat(seat) {
+        const seatIdInput = document.getElementById('seatIdInput');
+        seatIdInput.value = seat.seatId;
 
-    // Send reservation request to the server using AJAX
-    fetch(`/movies/schedules/${selectedScheduleId}/reserve`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        seatNumbers: selectedSeatNumber,
-        theaterId: theaterId,
-        screenId: screenId,
-        userId: userId
-      })
-    })
-            .then(response => {
-              // ...
-            })
-            .catch(error => console.error(error));
-  });
+        const seatItems = document.querySelectorAll('.seat-item');
+        seatItems.forEach(seatItem => {
+            seatItem.classList.remove('selected');
+        });
+
+        const selectedSeat = document.querySelector('.seat-item[data-seat-id="' + seat.seatId + '"]');
+        selectedSeat.classList.add('selected');
+    }
+
 </script>
+
+
+
 </body>
 </html>

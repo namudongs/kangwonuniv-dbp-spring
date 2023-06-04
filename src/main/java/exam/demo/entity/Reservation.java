@@ -1,5 +1,6 @@
 package exam.demo.entity;
 
+import exam.demo.dto.ReservationDto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,22 +15,20 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long reserveId;
+    private String theaterName;
+    private String screenroomName;
+    private String movieName;
+    private String startTime;
+    private String memberId;
 
-    @Column(name = "schedule_id")
-    private Long scheduleId;
 
-    @Column(name = "seat_numbers")
-    private String seatNumbers;
-
-    @Column(name = "theater_id")
-    private Long theaterId;
-
-    @Column(name = "screen_id")
-    private Long screenId;
-
-    @Column(name = "user_id")
-    private Long userId;
-
+    public Reservation(ReservationDto reservationDto){
+        this.theaterName = reservationDto.getTheaterName();
+        this.screenroomName = reservationDto.getScreenroomName();
+        this.movieName = reservationDto.getMovieName();
+        this.startTime = reservationDto.getStartTime();
+        this.memberId = reservationDto.getMemberId();
+    }
 
 }

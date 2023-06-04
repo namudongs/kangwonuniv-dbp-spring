@@ -8,5 +8,5 @@ import lombok.Setter;
 public class ScreenRoomDto {
     private Long theaterId;
     private String screenroomName;
-    private int seatCount;
+
 }
