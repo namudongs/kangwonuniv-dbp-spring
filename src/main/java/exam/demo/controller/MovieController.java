@@ -1,32 +1,32 @@
 package exam.demo.controller;
 
-
 import exam.demo.dto.MovieDto;
+import exam.demo.entity.Member;
 import exam.demo.entity.Movie;
 import exam.demo.entity.Review;
+import exam.demo.service.MemberService;
 import exam.demo.service.MovieService;
 import exam.demo.service.ReviewService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 
-@Slf4j
 @Controller
+@RequiredArgsConstructor
 public class MovieController {
 
-    @Autowired
-    private MovieService movieService;
-    @Autowired
-    private ReviewService reviewService;
+    private final MovieService movieService;
+    private final ReviewService reviewService;
+    private final MemberService memberService;
 
-    @GetMapping("/movies")
+    @GetMapping( value = {"/", "/movies"})
     public String showAllMovies(Model model) {
         List<Movie> movies = movieService.getAllMovies();
         model.addAttribute("movies", movies);
@@ -49,9 +49,23 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{id}")
-    public String showMovieDetails(@PathVariable Long id, Model model) {
+    public String showMovieDetails(@PathVariable Long id, Model model, Principal principal){
         Movie movie = movieService.getMovieById(id);
         model.addAttribute("movie", movie);
+
+        List<Review> reviews = reviewService.getReviewsByMovieId(id);
+        model.addAttribute("reviews", reviews);
+
+
+
+        String loggedInUserId = null;
+
+        if (principal != null) {
+            Member member = memberService.getMemberByUsername(principal.getName());
+            loggedInUserId = member.getMemberId().toString();
+        }
+        model.addAttribute("loggedInUserId", loggedInUserId);
+        //요청사항 memberId로 UserName 불러오기
 
         return "movieDetails";
     }

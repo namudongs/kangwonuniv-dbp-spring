@@ -20,10 +20,11 @@
         </div>
 
         <ul class="navbar__menu">
-            <li><a th:href="@{/}">홈</a></li>
+            <li><a th:href="@{/movies}">홈</a></li>
             <li><a th:href="@{/movies}">영화 목록</a></li>
             <li><a th:href="@{/movies/register}">영화 등록</a></li>
-            <li><a th:href="@{/login}">로그인</a></li>
+            <li th:if="${session.loggedIn}"><a th:href="@{/logout}">로그아웃</a></li>
+            <li th:unless="${session.loggedIn}"><a th:href="@{/login}">로그인</a></li>
             <li><a th:href="@{/signup}">회원가입</a></li>
         </ul>
     </nav>
@@ -68,8 +69,8 @@
         <label for="rating">관람등급:</label>
         <select id="rating" name="rating" required>
             <option value="전체 관람가">전체 관람가</option>
-            <option value="12세 관람가">12세 이상 관람가</option>
-            <option value="15세 관람가">15세 이상 관람가</option>
+            <option value="12세 이상 관람가">12세 이상 관람가</option>
+            <option value="15세 이상 관람가">15세 이상 관람가</option>
             <option value="청소년 관람불가">청소년 관람불가</option>
         </select>
     </div>

@@ -2,20 +2,16 @@ package exam.demo.entity;
 
 import exam.demo.dto.MovieDto;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
-import java.time.LocalDate;
+
 
 @NoArgsConstructor
 @Getter
-@Data
 @Entity
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long movie_id;
+    private Long movieId;
     private String title;
     private String director;
     private String cast;

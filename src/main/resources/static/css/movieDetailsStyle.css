@@ -102,12 +102,12 @@ a { text-decoration: none; color: black; }
 .movie-title {
   font-weight: bold;
   font-size: 2em;
-  flex-basis: 70%;
+  flex-basis: 85%;
 }
 
 .reserve-button {
   display: block;
-  width: 150px;
+  min-width: 120px;
   margin: 10px;
   padding: 10px;
   background-color: #E50914;
@@ -125,7 +125,7 @@ a { text-decoration: none; color: black; }
 
 .review-button {
     display: block;
-    width: 150px;
+    min-width: 120px;
     margin: 10px;
     padding: 10px;
     border: 1px solid;
@@ -179,13 +179,11 @@ a { text-decoration: none; color: black; }
     vertical-align: middle;
     width: 25px;
     height: auto;
+    overflow: hidden;
 }
 
 
 /*줄거리*/
-.plot-title{
-    display: inline-block;
-}
 .plot-content{
     display: inline-block;
     border-style: solid;
@@ -195,3 +193,48 @@ a { text-decoration: none; color: black; }
 }
 /** 영화 정보 끝 **/
 
+/**리뷰 시작**/
+.movie-reviews {
+    margin : auto 80px;
+    justify-content: center;
+}
+
+.review-box {
+    list-style: none;
+    padding:0;
+    border: 1.5px solid #e8ebee;
+}
+
+.review-box li {
+    border-radius: 6px;
+    padding:10px;
+    border: 1.5px solid #e8ebee;
+    margin: 10px
+}
+
+.rating-control {
+    display: flex;
+    justify-content: space-between;
+    width:100%
+}
+
+
+
+/*별점*/
+.rating-box {
+    display:flex;
+}
+
+.rating-star {
+    position: relative;
+    color: #ddd;
+}
+
+.rating-star span {
+  width: 0;
+  color: #ffc107;
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}

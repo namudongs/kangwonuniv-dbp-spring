@@ -6,26 +6,24 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @NoArgsConstructor
 @Getter
-@Data
 @Entity
 @Table(name = "MEMBER")
 public class Member implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="member_ID")
-    private Long member_id;
+    @Column(name="memberID")
+    private Long memberId;
 
     @Column(nullable = false, unique = true)
     private String userName;
@@ -65,7 +63,6 @@ public class Member implements UserDetails {
         authorities.add(new SimpleGrantedAuthority("ROLE_" + roleType.name()));
         return authorities;
     }
-
 
     @Override
     public String getUsername() {
