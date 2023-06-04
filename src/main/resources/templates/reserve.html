@@ -92,7 +92,7 @@
         <ul id="screenList">
             <li th:each="screen : ${screenrooms}" class="screen-item" th:data-theaterid="${screen.theaterId}">
                 <p>상영관 이름: <span th:text="${screen.screenroomName}"></span></p>
-                <ul class="schedule-list" th:each="schedule : ${schedules}" th:if="${schedule.screenroomId == screen.screenroomId}">
+                <ul class="schedule-list" th:each="schedule : ${schedules}" th:if="${schedule.screenroomId == screen.screenroomId && schedule.movieId == movieId}">
                     <li class="schedule-item" th:onclick="'selectSchedule(\'' + ${schedule.scheduleId} + '\')'" th:data-scheduleid="${schedule.scheduleId}" >
                         상영 일정 ID: <span th:text="${schedule.scheduleId}"></span><br>
                         시작 시간: <span th:text="${schedule.startTime}"></span><br>
@@ -178,6 +178,10 @@
     }
 
     function selectSeat(seat) {
+        if (seat.status !== 'AVAILABLE') {
+            return; // "available" 상태가 아닌 좌석은 클릭 이벤트를 막음
+        }
+
         const seatIdInput = document.getElementById('seatIdInput');
         seatIdInput.value = seat.seatId;
 
@@ -189,6 +193,7 @@
         const selectedSeat = document.querySelector('.seat-item[data-seat-id="' + seat.seatId + '"]');
         selectedSeat.classList.add('selected');
     }
+
 
 </script>
 
