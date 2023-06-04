@@ -21,16 +21,19 @@
     </div>
 
     <ul class="navbar__menu">
+        <li th:if="${#request.isUserInRole('ADMIN')}">
+            <a th:href="@{/admin/adminPage}">관리자 페이지</a>
+        </li>
         <li><a th:href="@{/movies}">홈</a></li>
         <li><a th:href="@{/movies}">영화 목록</a></li>
         <li th:if="${#request.isUserInRole('ADMIN')}">
             <a th:href="@{/movies/register}">영화 등록</a>
         </li>
 
-
         <li th:if="${session.loggedIn}"><a th:href="@{/logout}">로그아웃</a></li>
         <li th:unless="${session.loggedIn}"><a th:href="@{/login}">로그인</a></li>
-        <li><a th:href="@{/signup}">회원가입</a></li>
+        <li th:if="${session.loggedIn}"><a th:href="@{/mypage}">내 정보</a></li>
+        <li th:unless="${session.loggedIn}"><a th:href="@{/signup}">회원가입</a></li>
     </ul>
 </nav>
 
