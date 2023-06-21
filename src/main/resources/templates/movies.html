@@ -32,7 +32,7 @@
 
         <li th:if="${session.loggedIn}"><a th:href="@{/logout}">로그아웃</a></li>
         <li th:unless="${session.loggedIn}"><a th:href="@{/login}">로그인</a></li>
-        <li th:if="${session.loggedIn}"><a th:href="@{/mypage}">내 정보</a></li>
+        <li th:if="${session.loggedIn}"><a th:href="@{/mypage}">마이페이지</a></li>
         <li th:unless="${session.loggedIn}"><a th:href="@{/signup}">회원가입</a></li>
     </ul>
 </nav>
@@ -60,12 +60,18 @@
 </div>
 </div>
 <script th:inline="javascript">
-    /*<![CDATA[*/
     function openPopup(movieId) {
+
+        var loggedIn = /*[[${session.loggedIn}]]*/ false;
+
+        if (!loggedIn) {
+            alert('예매하기를 하기 위해서는 로그인이 필요합니다.');
+            return;
+        }
+
         var url = /*[[@{/movies/reserve/}]]*/ 'reserve';
         window.open(url + movieId, 'newwindow', 'width=600, height=600');
     }
-    /*]]>*/
 </script>
 </body>
 </html>
